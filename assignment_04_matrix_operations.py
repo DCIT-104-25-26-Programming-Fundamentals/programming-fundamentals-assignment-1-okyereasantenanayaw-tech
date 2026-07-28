@@ -60,3 +60,85 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def read_matrix(name):
+    print(f"--- Enter {name} ---")
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+    matrix = []
+    for i in range(rows):
+        parts = input(f"Enter row {i + 1}: ").split()
+        row = []
+        for p in parts:
+            row.append(int(p))
+        matrix.append(row)
+    return matrix
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        for value in row:
+            print(value, end="  ")
+        print()
+
+
+def transpose(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    result = []
+    for j in range(cols):
+        new_row = []
+        for i in range(rows):
+            new_row.append(matrix[i][j])
+        result.append(new_row)
+    return result
+
+
+def add_matrices(a, b):
+    rows = len(a)
+    cols = len(a[0])
+    result = []
+    for i in range(rows):
+        new_row = []
+        for j in range(cols):
+            new_row.append(a[i][j] + b[i][j])
+        result.append(new_row)
+    return result
+
+
+def multiply_matrices(a, b):
+    rows_a = len(a)
+    cols_a = len(a[0])
+    cols_b = len(b[0])
+    result = []
+    for i in range(rows_a):
+        new_row = []
+        for j in range(cols_b):
+            total = 0
+            for k in range(cols_a):
+                total = total + a[i][k] * b[k][j]
+            new_row.append(total)
+        result.append(new_row)
+    return result
+
+
+# main part
+print("PART A: Transpose")
+m = read_matrix("matrix")
+print("Original Matrix:")
+print_matrix(m)
+print("Transposed Matrix:")
+print_matrix(transpose(m))
+
+print()
+print("PART B: Addition")
+a = read_matrix("first matrix")
+b = read_matrix("second matrix")
+print("Sum:")
+print_matrix(add_matrices(a, b))
+
+print()
+print("PART C: Multiplication")
+a = read_matrix("matrix A")
+b = read_matrix("matrix B")
+print("Product:")
+print_matrix(multiply_matrices(a, b))
